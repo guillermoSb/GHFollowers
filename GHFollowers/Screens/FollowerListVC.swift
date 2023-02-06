@@ -14,18 +14,21 @@ class FollowerListVC: UIViewController {
     }
     
     var followers: [Follower] = []
+    var filterFollowers: [Follower] = []
     var hasMoreFollowers = true
     
     var userName: String!
     var page = 1
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
+    var isSearching = false
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViewController()
         configureCollectionView()
+        configureSearchController()
         getFollowers(for: userName, page: page)
         configureDataSource()
     }
@@ -49,6 +52,7 @@ class FollowerListVC: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.register(GFFollowerCell.self, forCellWithReuseIdentifier: GFFollowerCell.reuseID) // Register the cell
         collectionView.delegate = self
+        
     }
     
     
@@ -68,12 +72,22 @@ class FollowerListVC: UIViewController {
                     DispatchQueue.main.async { self.showEmptyStateView(view: self.view) }
                     return
                 }
-                self.updateData()
+                self.updateData(on: self.followers)
                 case .failure(let error):
                     self.presentGFAlertOnMainThread(title: "Bad Stuff Happened", message: error.rawValue, buttonTitle: "Ok")
             }
         }
     }
+    
+    func configureSearchController() {
+        let searchController = UISearchController()
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search for a username"
+        navigationItem.searchController = searchController
+
+        searchController.searchBar.delegate = self
+    }
+    
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, follower in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GFFollowerCell.reuseID, for: indexPath) as! GFFollowerCell
@@ -82,7 +96,7 @@ class FollowerListVC: UIViewController {
         })
     }
     
-    func updateData() {
+    func updateData(on followers: [Follower]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapshot.appendSections([.main])
         snapshot.appendItems(followers)
@@ -102,7 +116,34 @@ extension FollowerListVC: UICollectionViewDelegate {
             page += 1
             getFollowers(for: userName, page: page)
         }
-      
-        
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let activeArray = isSearching ? filterFollowers : followers
+        let follower = activeArray[indexPath.item]
+        let destVC = UserInfoVC()
+        destVC.follower = follower
+        let navController = UINavigationController(rootViewController: destVC)
+        present(navController, animated: true)
+    }
+}
+
+extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let filter = searchController.searchBar.text else {return}
+        if filter.isEmpty {
+            updateData(on: self.followers)
+            isSearching = false
+            return
+        }
+        isSearching = true
+        filterFollowers = followers.filter {$0.login.lowercased().contains(filter.lowercased())}
+        updateData(on: filterFollowers)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        updateData(on: self.followers)
+        isSearching = false
+    }
+    
 }
