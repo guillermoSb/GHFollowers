@@ -13,4 +13,7 @@ enum GFError: String, Error {
     case unableToComplete   = "Unable to complete your request, please check your internet connection."
     case invalidResponse    = "Invalid response from the server. Please try again."
     case invalidData        = "The data received from the server is invalid. Please try again."
+    case unableToFavorite   = "There was an error marking this user as favorite."
+    case unableToGetFavorites = "There was an error getting your favorites."
+    case alreadyInFavorites = "The user is already in your favorites."
 }

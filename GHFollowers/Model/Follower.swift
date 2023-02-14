@@ -8,7 +8,7 @@
 import Foundation
 
 struct Follower: Codable, Hashable {
-    var login: String
-    var avatarUrl: String   // Will be converted by the decoder
+    let login: String
+    let avatarUrl: String   // Will be converted by the decoder
     
 }

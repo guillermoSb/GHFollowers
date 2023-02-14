@@ -26,6 +26,11 @@ class GFButton: UIButton {
         fatalError("init(coder:) has not been implemented") // We are not using storyboards
     }
     
+    func set(backgroundColor: UIColor, title: String) {
+        self.backgroundColor = backgroundColor
+        setTitle(title, for: .normal)
+    }
+    
     
     private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
