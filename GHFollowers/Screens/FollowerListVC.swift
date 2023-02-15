@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol FollowerListVCDelegate: AnyObject {
+protocol FollowerListVCDelegate: GFDataLoadingVC {
     func didRequestFollowers(for username: String)
 }
 
-class FollowerListVC: UIViewController {
+class FollowerListVC: GFDataLoadingVC {
     
     enum Section {
         case main
@@ -26,7 +26,17 @@ class FollowerListVC: UIViewController {
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     var isSearching = false
-
+    
+    init(userName: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.userName = userName
+        title = userName
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +84,7 @@ class FollowerListVC: UIViewController {
                 if followers.count < 100 {self.hasMoreFollowers = false}
                 self.followers.append(contentsOf: followers)
                 if self.followers.isEmpty {
-                    DispatchQueue.main.async { self.showEmptyStateView(view: self.view) }
+                    DispatchQueue.main.async { self.showEmptyStateView(view: self.view, with: "This user does not have any followers 😪") }
                     return
                 }
                 self.updateData(on: self.followers)

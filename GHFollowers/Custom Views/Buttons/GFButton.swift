@@ -14,11 +14,11 @@ class GFButton: UIButton {
         configure()
     }
     
-    init(backgroundColor: UIColor, title: String) {
-        super.init(frame: .zero)    // Call our super initializer
+    convenience init(backgroundColor: UIColor, title: String) {
+        self.init(frame: .zero)    // Call our super initializer
         self.backgroundColor = backgroundColor  // Set the background color to the one passed
         self.setTitle(title, for: .normal)
-        configure()
+        
     }
     
     

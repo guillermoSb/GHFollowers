@@ -14,22 +14,23 @@ class GFEmptyStateView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        configure(with: "There are no results")
     }
     
-    init() {
+    init(with message: String) {
         super.init(frame: .zero)
-        configure()
+        configure(with: message)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configure() {
+    private func configure(with message: String) {
         addSubview(messageLabel)
         addSubview(logoImageView)
         
+        messageLabel.text = message
         
         messageLabel.numberOfLines = 3
         messageLabel.textColor = .secondaryLabel

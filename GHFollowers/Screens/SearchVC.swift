@@ -7,12 +7,12 @@
 
 import UIKit
 
-class SearchVC: UIViewController {
+class SearchVC: GFDataLoadingVC {
     
     let logoImageView = UIImageView()
     let userNameTextField = GFTextField()
     let callToActionButton = GFButton(backgroundColor: .systemGreen, title: "Get Followers")
-    
+    var logoImageViewTopConstraint: NSLayoutConstraint!
     var isUsernameEntered: Bool { !userNameTextField.text!.isEmpty }
 
     override func viewDidLoad() {
@@ -27,12 +27,13 @@ class SearchVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        userNameTextField.text = ""
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
     func createDismissKeyboardTapGesture() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
     }
     
@@ -43,9 +44,9 @@ class SearchVC: UIViewController {
             
         }
         
-        let followerListVC = FollowerListVC()
-        followerListVC.userName = userNameTextField.text
-        followerListVC.title = userNameTextField.text
+        userNameTextField.resignFirstResponder()
+        
+        let followerListVC = FollowerListVC(userName: userNameTextField.text!)
         navigationController?.pushViewController(followerListVC, animated: true)
     }
     
@@ -53,9 +54,11 @@ class SearchVC: UIViewController {
     func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false // We are doing programmatic UI
-        logoImageView.image = UIImage(named: "gh-logo")
+        logoImageView.image = Images.GHLogo
+        let topConstraintConstant: CGFloat = DeviceTypes.isIPhoneSE || DeviceTypes.isIPhone8Zoomed ? 20 : 80
+        logoImageViewTopConstraint = logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: topConstraintConstant)
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),  // Top 80
+            logoImageViewTopConstraint,
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Centered
             logoImageView.heightAnchor.constraint(equalToConstant: 200),    // Height
             logoImageView.widthAnchor.constraint(equalToConstant: 200)  // Width
