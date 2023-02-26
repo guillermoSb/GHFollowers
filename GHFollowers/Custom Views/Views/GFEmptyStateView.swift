@@ -27,30 +27,40 @@ class GFEmptyStateView: UIView {
     }
     
     private func configure(with message: String) {
-        addSubview(messageLabel)
-        addSubview(logoImageView)
-        
+        addSubviews(messageLabel, logoImageView)
+        configureMessageLabel(with: message)
+        configureImage()
+    }
+    
+    private func configureMessageLabel(with message: String) {
+
         messageLabel.text = message
-        
         messageLabel.numberOfLines = 3
         messageLabel.textColor = .secondaryLabel
-        
-        logoImageView.image = UIImage(named: "empty-state-logo")
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        let labelCenterYConstant: CGFloat = DeviceTypes.isIPhoneSE || DeviceTypes.isIPhone8Zoomed ? -50 : -150
+        let messageLabelCenterYConstraint = messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: labelCenterYConstant)
+        messageLabelCenterYConstraint.isActive = true
         NSLayoutConstraint.activate([
-            messageLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -150),
             messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 40),
             messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -40),
             messageLabel.heightAnchor.constraint(equalToConstant: 200),
-            
+        ])
+    }
+    
+    private func configureImage() {
+  
+        logoImageView.image = Images.emptyState
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        let logoBottomConstant: CGFloat = DeviceTypes.isIPhoneSE || DeviceTypes.isIPhone8Zoomed ? -60 : 40
+        let logoImageViewBottomConstaint = logoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: logoBottomConstant)
+        logoImageViewBottomConstaint.isActive = true
+        
+        NSLayoutConstraint.activate([
+           
             logoImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),   // Image is 30% larger than the screen
             logoImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1.3),
             logoImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 170),
-            logoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 40)
         ])
-        
-        
     }
 
 }

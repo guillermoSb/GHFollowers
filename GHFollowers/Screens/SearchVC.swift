@@ -18,7 +18,7 @@ class SearchVC: GFDataLoadingVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        
+        view.addSubviews(logoImageView, userNameTextField, callToActionButton)
         configureLogoImageView()
         configureTextField()
         configureButton()
@@ -41,18 +41,14 @@ class SearchVC: GFDataLoadingVC {
         guard isUsernameEntered else {
             presentGFAlertOnMainThread(title: "Empty Username", message: "Please enter a username. We need to know who to look for 😄.", buttonTitle: "Ok")
             return
-            
         }
-        
         userNameTextField.resignFirstResponder()
-        
         let followerListVC = FollowerListVC(userName: userNameTextField.text!)
         navigationController?.pushViewController(followerListVC, animated: true)
     }
     
     
     func configureLogoImageView() {
-        view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false // We are doing programmatic UI
         logoImageView.image = Images.GHLogo
         let topConstraintConstant: CGFloat = DeviceTypes.isIPhoneSE || DeviceTypes.isIPhone8Zoomed ? 20 : 80
@@ -67,7 +63,6 @@ class SearchVC: GFDataLoadingVC {
     }
     
     func configureTextField() {
-        view.addSubview(userNameTextField)
         userNameTextField.delegate = self
         NSLayoutConstraint.activate([
             userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 48),   // Anchored to the bottom of the Github Image
@@ -79,7 +74,6 @@ class SearchVC: GFDataLoadingVC {
     }
     
     func configureButton() {
-        view.addSubview(callToActionButton)
         NSLayoutConstraint.activate([
             callToActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),    // Anchored to the bottom of the screen
             callToActionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),

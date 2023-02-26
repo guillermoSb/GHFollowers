@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7000AF7B29889810005FABB2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7000AF7A29889810005FABB2 /* NetworkManager.swift */; };
+		7008C36129ABEAD200498A5E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7008C36029ABEAD200498A5E /* UIView+Ext.swift */; };
 		700D8ECF2989A6F900D52D7F /* GFFollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D8ECE2989A6F900D52D7F /* GFFollowerCell.swift */; };
 		700D8ED12989A78A00D52D7F /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D8ED02989A78A00D52D7F /* GFAvatarImageView.swift */; };
 		701A712D298B7B0700A18626 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701A712C298B7B0700A18626 /* UIHelper.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		7000AF7A29889810005FABB2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7008C36029ABEAD200498A5E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		700D8ECE2989A6F900D52D7F /* GFFollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerCell.swift; sourceTree = "<group>"; };
 		700D8ED02989A78A00D52D7F /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		701A712C298B7B0700A18626 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				706813CC2986FAE900AD1E37 /* UiViewController+Ext.swift */,
 				70DCCB8E299490A1004CCD43 /* Dates+Ext.swift */,
 				70DCCB90299490B6004CCD43 /* String+Ext.swift */,
+				7008C36029ABEAD200498A5E /* UIView+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				70B057E1299B50EA000F2A1E /* GFFavoriteCell.swift in Sources */,
 				708B68CA2992F1C1008A2FAA /* GFItemInfoView.swift in Sources */,
 				706813D32986FEAD00AD1E37 /* GFContainerView.swift in Sources */,
+				7008C36129ABEAD200498A5E /* UIView+Ext.swift in Sources */,
 				70EBDED92992118600341006 /* Constants.swift in Sources */,
 				70DD8CD6299C398800F49120 /* GFTabBarController.swift in Sources */,
 			);
