@@ -18,9 +18,9 @@ User Details          |  Favorites
 :-------------------------:|:-------------------------:
 ![Details](screenshots/details.png)  |  ![Favorites](screenshots/favorites.png)
 
-Add a Favorite
-:-------------------------:
-![Details](screenshots/favorite.png)
+Add a Favorite | App Icon
+:-------------------------:|:-------------------------:
+![Details](screenshots/favorite.png) | ![App Icon](screenshots/home.png) 
 
 ## Technologies Used
 - UIKit Programmatic view (No StoryBoards)
