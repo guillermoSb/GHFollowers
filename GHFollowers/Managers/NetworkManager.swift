@@ -10,7 +10,7 @@ import UIKit
 
 
 class NetworkManager {
-    static let shared =  NetworkManager()   // Make the singleton
+    static let shared =  NetworkManager()
     
     let baseUrl = "https://api.github.com"
     let cache = NSCache<NSString, UIImage>()

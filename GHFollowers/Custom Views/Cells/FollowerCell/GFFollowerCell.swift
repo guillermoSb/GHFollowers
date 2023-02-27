@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class GFFollowerCell: UICollectionViewCell {
     static let reuseID = "FollowerCell"
@@ -25,15 +26,16 @@ class GFFollowerCell: UICollectionViewCell {
     }
     
     func set(follower: Follower) {
-        usernameLabel.text = follower.login
-        NetworkManager.shared.downloadImage(from: follower.avatarUrl) { [weak self] image in
-            guard let image = image, let self = self else {
-                return
+        if #available(iOS 16.0, *) {
+            contentConfiguration = UIHostingConfiguration {
+                FollowerView(follower: follower)
             }
-            DispatchQueue.main.async {
-                self.avatarImageView.image = image
-            }
+        } else {
+            usernameLabel.text = follower.login
+            avatarImageView.downloadImage(fromURL: follower.avatarUrl)
         }
+        
+        
     }
     
     
