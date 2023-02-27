@@ -253,11 +253,11 @@
 			path = FollowerCell;
 			sourceTree = "<group>";
 		};
-		70950FFA29AD2A740029E40A /* ScreenShots */ = {
+		70950FFA29AD2A740029E40A /* screenshots */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = ScreenShots;
+			path = screenshots;
 			sourceTree = "<group>";
 		};
 		70D0DB0D2988047800BBF3F4 /* Model */ = {
@@ -272,7 +272,7 @@
 		70D720FA29857B820076055B = {
 			isa = PBXGroup;
 			children = (
-				70950FFA29AD2A740029E40A /* ScreenShots */,
+				70950FFA29AD2A740029E40A /* screenshots */,
 				70950FF929AD2A060029E40A /* README.md */,
 				70D7210529857B820076055B /* GHFollowers */,
 				70D7210429857B820076055B /* Products */,
