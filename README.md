@@ -1,5 +1,5 @@
 # Github Followers
-An iOS application made with UIKit that allows you to track any user's Github Followers. I made this project following a course by Sean Allen on [Teachable]([http](https://seanallen.teachable.com/courses/).
+An iOS application made with UIKit that allows you to track any user's Github Followers. I made this project following a course by Sean Allen on [Teachable]([http](https://seanallen.teachable.com/courses/)).
 
 ## Features
   ✅  Search for followers by username.
